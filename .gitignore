@@ -1,6 +1,7 @@
 .idea
 *.iml
 target
+*.git
 
 # Compiled class file
 *.class

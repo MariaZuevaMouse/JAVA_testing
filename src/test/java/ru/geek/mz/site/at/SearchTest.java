@@ -1,6 +1,7 @@
 package ru.geek.mz.site.at;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import static java.lang.Integer.parseInt;
 
 
+@Disabled
 public class SearchTest extends BaseTest {
     private int parsCount(WebElement elem){
         String[] arr = elem.getText().split("・");

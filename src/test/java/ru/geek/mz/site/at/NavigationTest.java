@@ -1,6 +1,7 @@
 package ru.geek.mz.site.at;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.cssSelector;
 
+@Disabled
 public class NavigationTest extends BaseTest {
     private String header;
     private WebElement testedElement;
