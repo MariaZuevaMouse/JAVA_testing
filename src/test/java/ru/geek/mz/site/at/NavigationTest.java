@@ -3,15 +3,19 @@ package ru.geek.mz.site.at;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.cssSelector;
 
-@Disabled
+
 public class NavigationTest extends BaseTest {
     private String header;
     private WebElement testedElement;
@@ -38,6 +42,22 @@ public class NavigationTest extends BaseTest {
         System.out.println("Хедер, футер присутствует");
     }
 
+    @ParameterizedTest
+    @MethodSource("argumentsStream")
+    public void navigateTest(By _byBut, By _byHead, String checkedHeader){
+        checkNavigation(_byBut, _byHead,checkedHeader);
+    }
+    public static Stream<Arguments> argumentsStream(){
+        return Stream.of(
+                Arguments.of(cssSelector("nav > a[href='/career']"), className("gb-header__title"), "Карьера"),
+                Arguments.of(cssSelector("nav > a[href='/tests']"), className("gb-header__title"), "Тесты" ),
+                Arguments.of(cssSelector("nav > a[href='/events']"),className("gb-header__title"), "Вебинары"),
+                Arguments.of(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум"),
+                Arguments.of(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум"),
+                Arguments.of(cssSelector("nav > a[href='/posts']"), className("gb-header__title"), "Блог"),
+                Arguments.of(cssSelector("nav > a[href='/courses']"), className("gb-header__title"), "Курсы")
+        );
+    }
 
     @Test
     void navCareer(){

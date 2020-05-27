@@ -9,9 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 import static java.lang.Integer.parseInt;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-
-@Disabled
 public class SearchTest extends BaseTest {
     private int parsCount(WebElement elem){
         String[] arr = elem.getText().split("・");
@@ -55,6 +55,16 @@ public class SearchTest extends BaseTest {
         Assertions.assertTrue(forumsTab.isDisplayed() && parsCount(forumsTab)!=350);
         Assertions.assertTrue(testsTab.isDisplayed() && parsCount(testsTab)!=0);
         Assertions.assertTrue(companiesTab.isDisplayed());
+
+        //hamcrest library
+        assertThat(professionTab.isDisplayed()&&parsCount(professionTab)>=2, equalTo(true));
+        assertThat(coursesTab.isDisplayed() && parsCount(coursesTab)>15,equalTo(true));
+        assertThat(webinarsTab.isDisplayed() && parsCount(webinarsTab)>180 && parsCount(webinarsTab)<300, equalTo(true));
+        assertThat(blogsTab.isDisplayed() && parsCount(blogsTab)>300,equalTo(true));
+        assertThat(forumsTab.isDisplayed() && parsCount(forumsTab)!=350,equalTo(true));
+        assertThat(testsTab.isDisplayed() && parsCount(testsTab)!=0,equalTo(true));
+        assertThat(companiesTab.isDisplayed(),equalTo(true));
+
 
 //        Профессий не менее чем 2
 //        Курсов более 15
