@@ -1,4 +1,4 @@
-package ru.geek.mz.site.at;
+package ru.geek.mz.site.at.base;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,7 @@ public abstract class BaseTest {
 
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "E:\\JAVA_2\\mz-site-at\\src\\test\\resources\\chromedriver");
 
         ChromeOptions options = new ChromeOptions();
@@ -24,7 +24,7 @@ public abstract class BaseTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         driver.quit();
     }
 

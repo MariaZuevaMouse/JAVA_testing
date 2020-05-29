@@ -1,12 +1,13 @@
 package ru.geek.mz.site.at;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.geek.mz.site.at.base.BaseTest;
+
 import java.util.concurrent.TimeUnit;
 import static java.lang.Integer.parseInt;
 import static org.hamcrest.CoreMatchers.*;

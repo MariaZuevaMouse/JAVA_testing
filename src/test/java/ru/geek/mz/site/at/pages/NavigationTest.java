@@ -1,13 +1,13 @@
 package ru.geek.mz.site.at;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import ru.geek.mz.site.at.base.BaseTest;
 
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
