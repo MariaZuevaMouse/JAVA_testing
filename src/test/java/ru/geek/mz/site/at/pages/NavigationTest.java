@@ -1,88 +1,111 @@
-package ru.geek.mz.site.at;
+package ru.geek.mz.site.at.pages;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import ru.geek.mz.site.at.base.BaseTest;
+import org.openqa.selenium.support.PageFactory;
+import ru.geek.mz.site.at.pages.base.BaseTest;
 
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-import static org.openqa.selenium.By.className;
-import static org.openqa.selenium.By.cssSelector;
-
-
+@Execution(value = ExecutionMode.CONCURRENT)
 public class NavigationTest extends BaseTest {
-    private String header;
-    private WebElement testedElement;
-
-
-    void checkNavigation(By _byBut, By _byHead, String checkedHeader){
+    @BeforeEach
+    public void openSite() {
         driver.get(BASE_URL + "/career");
-        testedElement = driver.findElement(_byBut);
-        testedElement.click();
-        if(testedElement==driver.findElement(cssSelector("nav > a[href='/courses']"))){
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-            driver.findElement(By.xpath("//div/div/button[*]")).click();
-        }
-        header = driver.findElement(_byHead).getText();
-        Assertions.assertEquals(checkedHeader,header);
-        System.out.println("Навигационная кнопка " + header + " успешно отработала");
-        checkHeadFooter();
-    }
-    void checkHeadFooter(){
-        testedElement = driver.findElement(By.xpath("//footer"));
-        Assertions.assertTrue(testedElement.isEnabled());
-        testedElement = driver.findElement(By.xpath("//header"));
-        Assertions.assertTrue(testedElement.isEnabled());
-        System.out.println("Хедер, футер присутствует");
     }
 
     @ParameterizedTest
-    @MethodSource("argumentsStream")
-    public void navigateTest(By _byBut, By _byHead, String checkedHeader){
-        checkNavigation(_byBut, _byHead,checkedHeader);
-    }
-    public static Stream<Arguments> argumentsStream(){
-        return Stream.of(
-                Arguments.of(cssSelector("nav > a[href='/career']"), className("gb-header__title"), "Карьера"),
-                Arguments.of(cssSelector("nav > a[href='/tests']"), className("gb-header__title"), "Тесты" ),
-                Arguments.of(cssSelector("nav > a[href='/events']"),className("gb-header__title"), "Вебинары"),
-                Arguments.of(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум"),
-                Arguments.of(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум"),
-                Arguments.of(cssSelector("nav > a[href='/posts']"), className("gb-header__title"), "Блог"),
-                Arguments.of(cssSelector("nav > a[href='/courses']"), className("gb-header__title"), "Курсы")
-        );
+    @DisplayName("check navigation items")
+    @MethodSource("pageGenerator")
+    public void navigationPanelTest(String buttonTitle) {
+        new NavigationTab(driver)
+                .clickButton(buttonTitle)
+                .checkHeader(buttonTitle);
+
+//        NavigationTab navigationTab = PageFactory.initElements(driver, NavigationTab.class);
+//        navigationTab.clickButton("Тесты");
+//        WebElement carreeNavItemButton = driver.findElement(NavigationTab.careerNavSelector);
+//        carreeNavItemButton.click();
+//        Page.checkHeader("Тесты", driver);
+
+
     }
 
-    @Test
-    void navCareer(){
-        checkNavigation(cssSelector("nav > a[href='/career']"), className("gb-header__title"), "Карьера");
+    public static Stream<String> pageGenerator() {
+        return Stream.of("Тесты", "Карьера", "Блог", "Форум", "Вебинары", "Курсы");
     }
-    @Test
-    void navTest(){
-        checkNavigation(cssSelector("nav > a[href='/tests']"), className("gb-header__title"), "Тесты" );
-    }
-    @Test
-    void navWebinar(){
-        checkNavigation(cssSelector("nav > a[href='/events']"),className("gb-header__title"), "Вебинары");
-    }
-    @Test
-    void navForum(){
-        checkNavigation(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум");
-    }
-    @Test
-    void navBlog(){
-        checkNavigation(cssSelector("nav > a[href='/posts']"), className("gb-header__title"), "Блог");
-    }
-    @Test
-    void navCourses(){
-        checkNavigation(cssSelector("nav > a[href='/courses']"), className("gb-header__title"), "Курсы" );
-    }
+//    private String header;
+//    private WebElement testedElement;
+//
+//
+//    void checkNavigation(By _byBut, By _byHead, String checkedHeader){
+//        driver.get(BASE_URL + "/career");
+//        testedElement = driver.findElement(_byBut);
+//        testedElement.click();
+//        if(testedElement==driver.findElement(cssSelector("nav > a[href='/courses']"))){
+//            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//            driver.findElement(By.xpath("//div/div/button[*]")).click();
+//        }
+//        header = driver.findElement(_byHead).getText();
+//        Assertions.assertEquals(checkedHeader,header);
+//        System.out.println("Навигационная кнопка " + header + " успешно отработала");
+//        checkHeadFooter();
+//    }
+//    void checkHeadFooter(){
+//        testedElement = driver.findElement(By.xpath("//footer"));
+//        Assertions.assertTrue(testedElement.isEnabled());
+//        testedElement = driver.findElement(By.xpath("//header"));
+//        Assertions.assertTrue(testedElement.isEnabled());
+//        System.out.println("Хедер, футер присутствует");
+//    }
+//
+//    @ParameterizedTest
+//    @MethodSource("argumentsStream")
+//    public void navigateTest(By _byBut, By _byHead, String checkedHeader){
+//        checkNavigation(_byBut, _byHead,checkedHeader);
+//    }
+//    public static Stream<Arguments> argumentsStream(){
+//        return Stream.of(
+//                Arguments.of(cssSelector("nav > a[href='/career']"), className("gb-header__title"), "Карьера"),
+//                Arguments.of(cssSelector("nav > a[href='/tests']"), className("gb-header__title"), "Тесты" ),
+//                Arguments.of(cssSelector("nav > a[href='/events']"),className("gb-header__title"), "Вебинары"),
+//                Arguments.of(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум"),
+//                Arguments.of(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум"),
+//                Arguments.of(cssSelector("nav > a[href='/posts']"), className("gb-header__title"), "Блог"),
+//                Arguments.of(cssSelector("nav > a[href='/courses']"), className("gb-header__title"), "Курсы")
+//        );
+//    }
+//
+//    @Test
+//    void navCareer(){
+//        checkNavigation(cssSelector("nav > a[href='/career']"), className("gb-header__title"), "Карьера");
+//    }
+//    @Test
+//    void navTest(){
+//        checkNavigation(cssSelector("nav > a[href='/tests']"), className("gb-header__title"), "Тесты" );
+//    }
+//    @Test
+//    void navWebinar(){
+//        checkNavigation(cssSelector("nav > a[href='/events']"),className("gb-header__title"), "Вебинары");
+//    }
+//    @Test
+//    void navForum(){
+//        checkNavigation(cssSelector("nav > a[href='/topics']"), className("gb-header__title"),"Форум");
+//    }
+//    @Test
+//    void navBlog(){
+//        checkNavigation(cssSelector("nav > a[href='/posts']"), className("gb-header__title"), "Блог");
+//    }
+//    @Test
+//    void navCourses(){
+//        checkNavigation(cssSelector("nav > a[href='/courses']"), className("gb-header__title"), "Курсы" );
+//    }
 
 //    @Test
 //    void navCourses(){

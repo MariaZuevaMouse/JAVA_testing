@@ -1,5 +1,6 @@
-package ru.geek.mz.site.at.junit;
+package ru.geek.examples.junit;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -9,6 +10,7 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 public class AssertionsExampleTest {
     @Test
     public void test01(){

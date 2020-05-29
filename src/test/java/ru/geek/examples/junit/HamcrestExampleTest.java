@@ -1,5 +1,6 @@
-package ru.geek.mz.site.at.junit;
+package ru.geek.examples.junit;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -7,7 +8,7 @@ import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsSame.sameInstance;
-
+@Disabled
 public class HamcrestExampleTest {
     @Test
     public void test01(){

@@ -1,5 +1,6 @@
-package ru.geek.mz.site.at.base;
+package ru.geek.mz.site.at.pages.base;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,8 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "E:\\JAVA_2\\mz-site-at\\src\\test\\resources\\chromedriver");
+//        System.setProperty("webdriver.chrome.driver", "E:\\JAVA_2\\mz-site-at\\src\\test\\resources\\chromedriver");
+        WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
