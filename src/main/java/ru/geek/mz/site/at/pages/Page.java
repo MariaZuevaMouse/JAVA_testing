@@ -14,19 +14,37 @@ public class Page extends BasePage {
     @FindBy(className = "gb-header__title")
     private WebElement pageHeader;
 
+    @FindBy(css= "ul.nav-tabs >li >a#cour-link[href='#cour-new'")
+    private WebElement CoursesCheckBox;
+
+
+    private CoursesCheckBoxes coursesCheckBoxes;
 
     private NavigationTab navigationTab;
 
     private SearchOnPage searchOnPage;
 
+    private AllCourses allCourses;
+
+    public AllCourses getAllCourses(){
+        return allCourses;
+    }
+
+
     public SearchOnPage getSearchOnPage() {
         return searchOnPage;
+    }
+
+    public CoursesCheckBoxes getCoursesCheckBoxes(){
+        return coursesCheckBoxes;
     }
 
     public Page(WebDriver driver) {
         super(driver);
         navigationTab = new NavigationTab(driver);
         searchOnPage = new SearchOnPage(driver);
+        coursesCheckBoxes = new CoursesCheckBoxes(driver);
+        allCourses = new AllCourses(driver);
     }
 
 
@@ -64,6 +82,13 @@ public class Page extends BasePage {
     @FindBy(css = "ul.search-page-tabs > li > a[data-tab='companies']")
     private WebElement companiesTab;
 
+    @FindBy(css= "ul.nav-tabs >li >a#cour-link[href='#cour-new'")  // should be in header class
+    private WebElement coursesOpen;
+
+    public Page openCourses(){    // should be in header class
+        coursesOpen.click();
+        return new Page(driver);
+    }
 
     public Page checkTab(String tabTitle) {
         switch (tabTitle) {
