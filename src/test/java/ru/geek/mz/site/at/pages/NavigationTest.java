@@ -2,13 +2,10 @@ package ru.geek.mz.site.at.pages;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import ru.geek.mz.site.at.pages.base.BaseTest;
 
 import java.util.stream.Stream;
@@ -27,14 +24,6 @@ public class NavigationTest extends BaseTest {
         new NavigationTab(driver)
                 .clickButton(buttonTitle)
                 .checkHeader(buttonTitle);
-
-//        NavigationTab navigationTab = PageFactory.initElements(driver, NavigationTab.class);
-//        navigationTab.clickButton("Тесты");
-//        WebElement carreeNavItemButton = driver.findElement(NavigationTab.careerNavSelector);
-//        carreeNavItemButton.click();
-//        Page.checkHeader("Тесты", driver);
-
-
     }
 
     public static Stream<String> pageGenerator() {
@@ -161,17 +150,6 @@ public class NavigationTest extends BaseTest {
 //        driver.findElement(cssSelector("nav > a[href='/posts']")).click();
 //        header = driver.findElement(className("gb-header__title")).getText();
 //        Assertions.assertEquals("Блог", header);
-//
-////      ---------------------
-////        WebElement coursesNavButton = driver
-////                .findElement(By.cssSelector("nav > a[href='/courses']"));
-////        coursesNavButton.click();
-////
-////        header = driver.findElement(By.className("gb-header__title")).getText();
-////        Assertions.assertEquals("Курсы", header);
-////
-////        carreeNavButton.click();
-////        -----------------------
 //
 //        System.out.println("Test passed");
 //
