@@ -1,6 +1,7 @@
 package ru.geek.mz.site.at.pages;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
@@ -10,6 +11,7 @@ import ru.geek.mz.site.at.pages.base.BaseTest;
 
 import java.util.stream.Stream;
 
+@Disabled
 @Execution(value = ExecutionMode.CONCURRENT)
 public class NavigationTest extends BaseTest {
     @BeforeEach

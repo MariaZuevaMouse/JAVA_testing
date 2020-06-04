@@ -1,6 +1,9 @@
 package ru.geek.examples.exceptions;
 
-public class FileNotFoundException extends Throwable {
+import org.junit.jupiter.api.Disabled;
+
+@Disabled
+public class FileNotFoundExceptionExample {
 //    public static void main(String[] args) {
 //        //FileNotFoundException
 //        File file = new File("C:/path");

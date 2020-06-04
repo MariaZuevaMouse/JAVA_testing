@@ -16,7 +16,7 @@ public class AllCourses extends BasePage {
     private WebElement testing01;
 
     @FindBy(css= "div[data-id='85']")
-    private WebElement testting02;
+    private WebElement testting02; Object object=new Object();
 
     public Page checkCourseAppeared(String courseName){
         switch (courseName){
