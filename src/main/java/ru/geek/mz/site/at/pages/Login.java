@@ -1,5 +1,6 @@
 package ru.geek.mz.site.at.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,7 @@ public class Login extends BasePage {
     public void TypePassword(){
         password.sendKeys("hao17583");
     }
+    @Step("login site")
     public Page LoginSite(){
         TypeLogin();
         TypePassword();

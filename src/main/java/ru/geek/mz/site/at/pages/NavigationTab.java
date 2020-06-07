@@ -1,5 +1,6 @@
 package ru.geek.mz.site.at.pages;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
@@ -34,7 +35,7 @@ public class NavigationTab extends BasePage {
         super(driver);
     }
 
-
+    @Step("проверка открытия страницы {buttonTitle}")
     public Page clickButton(String buttonTitle){
         switch (buttonTitle){
             case "Карьера":{

@@ -1,5 +1,6 @@
 package ru.geek.mz.site.at.pages;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,7 +48,7 @@ public class Page extends BasePage {
         allCourses = new AllCourses(driver);
     }
 
-
+    @Step("проверка хедера {expected}")
     public Page checkHeader(String expected){
         assertEquals(expected, pageHeader.getText());
         return this;
