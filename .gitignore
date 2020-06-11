@@ -1,6 +1,8 @@
 .idea
+.allure
 *.iml
 target
+*.git
 
 # Compiled class file
 *.class
