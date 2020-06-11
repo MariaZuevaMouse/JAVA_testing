@@ -1,10 +1,11 @@
 package ru.geek.mz.site.at.pages;
 
-import io.qameta.allure.*;
+import io.qameta.allure.Step;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static java.lang.Integer.parseInt;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,6 +32,9 @@ public class Page extends BasePage {
         return allCourses;
     }
 
+    public NavigationTab getNavigationTab(){
+        return navigationTab;
+    }
 
     public SearchOnPage getSearchOnPage() {
         return searchOnPage;
@@ -38,6 +42,10 @@ public class Page extends BasePage {
 
     public CoursesCheckBoxes getCoursesCheckBoxes(){
         return coursesCheckBoxes;
+    }
+
+    public void setSearchOnPage(SearchOnPage searchOnPage) {
+        this.searchOnPage = searchOnPage;
     }
 
     public Page(WebDriver driver) {
@@ -58,9 +66,8 @@ public class Page extends BasePage {
         return parseInt(checkedElement.getText().split("・")[1]);
     }
 
-    public NavigationTab getNavigationTab(){
-        return navigationTab;
-    }
+
+
 
     @FindBy(css = "ul.search-page-tabs > li > a[data-tab='professions']")
     private WebElement professionTab;
@@ -85,6 +92,17 @@ public class Page extends BasePage {
 
     @FindBy(css= "ul.nav-tabs >li >a#cour-link[href='#cour-new'")  // should be in header class
     private WebElement coursesOpen;
+
+    @FindBy(css = "div button svg[class='svg-icon icon-popup-close-button']")
+    private WebElement buttonPopUpClosed;
+
+    public Page closePopUp (WebDriver driver){
+        wait10seconds.until(ExpectedConditions.visibilityOf(buttonPopUpClosed));
+        if(buttonPopUpClosed.isDisplayed()){
+            this.buttonPopUpClosed.click();
+        }
+        return this;
+    }
 
     public Page openCourses(){    // should be in header class
         coursesOpen.click();
@@ -155,6 +173,7 @@ public class Page extends BasePage {
                 throw new NotFoundException("Element not found " + tabTitle);
             }
         }
+
         return new Page(driver);
     }
 }

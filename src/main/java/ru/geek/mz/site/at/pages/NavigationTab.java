@@ -13,6 +13,16 @@ import static org.openqa.selenium.By.cssSelector;
 
 public class NavigationTab extends BasePage {
 
+
+
+    public NavigationTab(WebDriver driver) {
+        super(driver);
+    }
+
+    public Page getPage(){
+        return new Page(driver);
+    }
+
     @FindBy(css = "nav > a[href='/career']")
     private WebElement careerNavButton;
 
@@ -31,9 +41,7 @@ public class NavigationTab extends BasePage {
     @FindBy(css = "nav > a[href='/courses']")
     private WebElement coursesNavButton;
 
-    public NavigationTab(WebDriver driver) {
-        super(driver);
-    }
+
 
     @Step("проверка открытия страницы {buttonTitle}")
     public Page clickButton(String buttonTitle){
